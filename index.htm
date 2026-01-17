@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINEDROP слот: RTP 96%, выигрыш до 5000x, каскады и TNT</title>
+    <meta name="description" content="MINEDROP — революционный слот с механикой Minecraft. RTP 96%, максимальный выигрыш 5000×, каскадные комбинации, TNT-взрывы и три уровня джекпотов. Попробуй прибыльный слот онлайн.">
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="MINEDROP слот: RTP 96%, выигрыш до 5000x, каскады и TNT">
+    <meta property="og:description" content="MINEDROP — революционный слот с механикой Minecraft. RTP 96%, максимальный выигрыш 5000×, каскадные комбинации, TNT-взрывы и три уровня джекпотов. Попробуй прибыльный слот онлайн.">
+    <meta property="og:image" content="images/bg-mobile.png">
+    <meta property="og:url" content="https://ваш-сайт/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/favicon.ico" sizes="32x32">
+    <link rel="icon" type="image/png" href="images/favicon.ico" sizes="16x16">
+    <link rel="apple-touch-icon" href="images/favicon.ico">
+
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="fonts/minecraft-ten-font-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="fonts/BenzinBold.woff2" as="font" type="font/woff2" crossorigin>
+
+    <style>
+        /* --- ГЛОБАЛЬНАЯ ЗАЩИТА ОТ СКРОЛЛА --- */
+        html {
+            overflow-x: hidden;
+            width: 100%;
+        }
+
+        /* --- ШРИФТЫ --- */
+        @font-face {
+            font-family: 'Minecraft';
+            src: url('fonts/minecraft-ten-font-cyrillic.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Benzin';
+            src: url('fonts/BenzinBold.woff2') format('woff2');
+            font-weight: bold;
+            font-style: normal;
+        }
+
+        /* --- ОБЩИЕ СТИЛИ --- */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            max-width: 100%;
+            overflow-wrap: break-word;
+        }
+
+        body {
+            color: white;
+            font-family: 'Benzin', 'Arial Black', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Фон с блюром — адаптивная версия */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('images/widescreen-1920x1080-1 1.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            filter: blur(8px);
+            z-index: -1;
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 768px) {
+            body::before {
+                background-image: url('images/bg-mobile.png');
+                background-color: #2d2d2d; /* fallback, если изображение не загрузится */
+            }
+        }
+
+        /* --- СТИЛИ ТЕКСТА --- */
+        .mc-font {
+            font-family: 'Minecraft', sans-serif;
+            text-transform: uppercase;
+            color: white;
+            line-height: 1;
+        }
+
+        .stroke-sm {
+            text-shadow: 
+                2px 0 0 #000, -2px 0 0 #000, 0 2px 0 #000, 0 -2px 0 #000,
+                2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000;
+        }
+
+        .stroke-med {
+            text-shadow: 
+                3px 0 0 #000, -3px 0 0 #000, 0 3px 0 #000, 0 -3px 0 #000,
+                3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
+                4px 4px 0 #000, 5px 5px 0 #000; 
+        }
+
+        .stroke-lg {
+            text-shadow: 
+                4px 0 0 #000, -4px 0 0 #000, 0 4px 0 #000, 0 -4px 0 #000,
+                4px 4px 0 #000, -4px -4px 0 #000, 4px -4px 0 #000, -4px 4px 0 #000,
+                6px 6px 0 #000, 7px 7px 0 #000, 8px 8px 0 #000;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 30px;
+            flex: 1;
+            overflow-x: hidden;
+        }
+
+        /* --- ШАПКА --- */
+        header {
+            text-align: center;
+            width: 100%;
+            z-index: 2;
+        }
+
+        .logo-img {
+            max-width: 90%;
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 0 auto 15px auto;
+        }
+
+        .subtitle {
+            font-size: 30px;
+            margin-bottom: 30px;
+            letter-spacing: 1px;
+            text-shadow: 
+                3px 0 0 #000, -3px 0 0 #000, 0 3px 0 #000, 0 -3px 0 #000,
+                3px 3px 0 #000, -3px -3px 0 #000, 3px -3px 0 #000, -3px 3px 0 #000,
+                5px 5px 0 #000;
+        }
+
+        .header-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+            padding: 0 10px;
+        }
+
+        .btn-img {
+            cursor: pointer;
+            transition: transform 0.1s;
+            height: 55px;
+        }
+        .btn-img:hover {
+            transform: scale(1.05);
+        }
+        .btn-img:active {
+            transform: scale(0.95);
+        }
+
+        /* --- СЕКЦИЯ ВИДЕО --- */
+        .section-title {
+            font-size: 36px;
+            margin: 60px 0 30px; 
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .video-composition {
+            position: relative;
+            width: 100%;
+            height: 580px; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 70px; 
+        }
+
+        .frame-bg {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 550px; 
+            height: auto;
+            z-index: 1;
+        }
+
+        .video-wrapper {
+            position: relative;
+            z-index: 5;
+            border: 6px solid #000;
+            background: #000;
+            width: 340px; 
+            height: 620px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- БЛОКИ (ОБ ИГРЕ + ФУТЕР) --- */
+        .dark-box {
+            width: 100%;
+            max-width: 1000px;
+            background-color: rgba(89, 83, 78, 0.9); 
+            border: 4px solid #000;
+            padding: 40px 50px;
+            z-index: 5;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .about-content {
+            text-align: left;
+            display: block;
+        }
+
+        .about-heading {
+            font-family: 'Minecraft', sans-serif;
+            font-size: 52px; 
+            margin-right: 10px; 
+            display: inline; 
+            vertical-align: sub;
+            text-shadow: 
+                5px 0 0 #000, -5px 0 0 #000, 0 5px 0 #000, 0 -5px 0 #000,
+                5px 5px 0 #000, -5px -5px 0 #000, 5px -5px 0 #000, -5px 5px 0 #000,
+                8px 8px 0 #000;
+        }
+
+        .about-desc {
+            font-family: 'Benzin', 'Arial Black', sans-serif; 
+            font-size: 20px; 
+            line-height: 1.4;
+            color: white;
+            font-weight: normal; 
+            text-transform: uppercase;
+            text-shadow: 1px 1px 0 #000;
+            display: inline; 
+        }
+
+        /* --- CTA БЛОК --- */
+        .cta-wrapper {
+             width: 100%;
+             display: flex;
+             flex-wrap: nowrap; 
+             align-items: center;
+             justify-content: center;
+             gap: 25px;
+             z-index: 5;
+             position: relative;
+             margin-bottom: 60px;
+        }
+
+        .cta-text {
+            font-size: 42px;
+            line-height: 1;
+            white-space: nowrap; 
+        }
+
+        .cta-btn-img {
+            height: 70px;
+            cursor: pointer;
+            transition: transform 0.1s;
+            filter: drop-shadow(4px 4px 0 #000);
+            flex-shrink: 0; 
+        }
+        .cta-btn-img:hover {
+            transform: scale(1.03);
+        }
+        .cta-btn-img:active {
+            transform: scale(0.95);
+        }
+
+        /* --- ТОП КАЗИНО СТИЛИ --- */
+        .casinos-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 60px 0 80px;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1000px;
+            padding: 0 15px;
+        }
+
+        .casino-card {
+            background-color: rgba(89, 83, 78, 0.92);
+            border: 4px solid #000;
+            padding: 25px 20px;
+            text-align: center;
+            width: 220px;
+            position: relative;
+            z-index: 5;
+            box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+            transition: transform 0.2s;
+        }
+
+        .casino-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .casino-rank {
+            font-size: 32px;
+            margin-bottom: 12px;
+            color: #FFD700; /* золотой для #1 */
+        }
+
+        .casino-card:nth-child(2) .casino-rank { color: #C0C0C0; } /* серебро */
+        .casino-card:nth-child(3) .casino-rank { color: #CD7F32; } /* бронза */
+
+        .casino-logo {
+            height: 100px;
+            margin: 10px 0 15px;
+            filter: drop-shadow(1px 1px 0 #000);
+        }
+
+        .casino-bonus {
+            font-size: 16px;
+            margin: 12px 0;
+            line-height: 1.3;
+            color: #ffff55;
+        }
+
+        .casino-btn {
+            display: inline-block;
+            background-color: #3f9b2d;
+            color: white;
+            padding: 10px 20px;
+            border: 2px solid #000;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 8px;
+            box-shadow: inset -2px -3px 0 rgba(0,0,0,0.2), 2px 2px 0 #000;
+            transition: transform 0.1s, background-color 0.2s;
+        }
+        .casino-btn:hover {
+            transform: scale(1.05);
+            background-color: #4CAF50;
+        }
+        .casino-btn:active {
+            transform: scale(0.95);
+            box-shadow: inset 2px 2px 0 rgba(0,0,0,0.4);
+        }
+
+        /* --- ФУТЕР --- */
+        footer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            padding-bottom: 30px;
+        }
+
+        .footer-box {
+            text-align: center;
+            padding: 25px;
+            margin-bottom: 0;
+            background-color: rgba(89, 83, 78, 0.9); 
+        }
+
+        .footer-warning {
+            font-family: 'Minecraft', sans-serif; 
+            font-size: 16px;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 2px 2px 0 #000; 
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+            letter-spacing: 1px;
+        }
+
+        .footer-copy {
+            font-family: 'Minecraft', sans-serif;
+            font-size: 14px;
+            text-transform: uppercase;
+            color: #ccc;
+            text-shadow: 2px 2px 0 #000;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- ПОПАП --- */
+        .popup-notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background-color: rgba(89, 83, 78, 0.98);
+            border: 4px solid #000;
+            padding: 40px 30px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            gap: 20px;
+            width: 90%;
+            max-width: 450px;
+            box-shadow: 0 0 0 1000px rgba(0,0,0,0.7);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28), visibility 0.4s;
+        }
+
+        .popup-notification.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+            visibility: visible;
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-family: 'Minecraft', sans-serif;
+            font-size: 24px;
+            color: #aaa;
+            cursor: pointer;
+            line-height: 1;
+            transition: color 0.2s;
+        }
+        .popup-close:hover {
+            color: #fff;
+        }
+
+        .popup-icon {
+            width: 80px;
+            height: auto;
+            filter: drop-shadow(4px 4px 0 #000);
+        }
+
+        .popup-text {
+            font-size: 24px;
+            color: #ffff55;
+            line-height: 1.3;
+        }
+
+        .popup-btn {
+            display: inline-block;
+            text-decoration: none;
+            background-color: #3f9b2d;
+            color: white;
+            padding: 12px 30px;
+            border: 2px solid #000;
+            text-align: center;
+            font-size: 18px;
+            box-shadow: inset -2px -4px 0 rgba(0,0,0,0.2), 2px 2px 0 #000;
+            transition: transform 0.1s;
+            margin-top: 10px;
+            font-family: 'Minecraft', sans-serif;
+        }
+        .popup-btn:hover {
+            transform: scale(1.05);
+            background-color: #4CAF50;
+        }
+        .popup-btn:active {
+            transform: scale(0.95);
+            box-shadow: inset 2px 2px 0 rgba(0,0,0,0.4);
+        }
+
+        /* Reduced motion */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+            }
+            .btn-img,
+            .cta-btn-img,
+            .popup-btn,
+            .casino-btn {
+                transition: none !important;
+            }
+            .btn-img:hover,
+            .cta-btn-img:hover,
+            .casino-card:hover {
+                transform: none !important;
+            }
+        }
+
+        /* ========================================= */
+        /* --- АДАПТАЦИЯ ПОД ТЕЛЕФОН --- */
+        /* ========================================= */
+        @media (max-width: 768px) {
+            .container {
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            .logo-img {
+                max-width: 90%;
+            }
+
+            .subtitle {
+                font-size: 20px;
+                padding: 0 10px;
+                line-height: 1.3;
+                text-shadow: 2px 2px 0 #000;
+            }
+
+            .section-title {
+                font-size: 32px;
+                margin: 50px 0 25px;
+            }
+
+            .video-composition {
+                height: auto;
+                min-height: 500px;
+                margin-bottom: 50px;
+            }
+            .frame-bg {
+                width: 95%;
+                max-width: 400px;
+            }
+            .video-wrapper {
+                width: 60%;
+                max-width: 240px;
+                height: auto;
+                aspect-ratio: 9 / 16;
+                max-height: 70vh;
+            }
+
+            .dark-box {
+                padding: 25px 20px;
+            }
+            .about-heading {
+                font-size: 34px;
+                display: block; 
+                margin-bottom: 15px;
+            }
+            .about-desc {
+                font-size: 16px;
+                line-height: 1.5;
+                text-shadow: 1px 1px 0 #000;
+            }
+
+            .cta-wrapper {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .cta-text {
+                font-size: 32px;
+                white-space: normal; 
+                text-align: center;
+            }
+            .cta-btn-img {
+                height: 60px;
+            }
+
+            .casinos-grid {
+                gap: 20px;
+                margin: 40px 0 60px;
+            }
+
+            .casino-card {
+                width: calc(100% - 40px);
+                max-width: 300px;
+                padding: 20px 15px;
+            }
+
+            .casino-rank {
+                font-size: 28px;
+            }
+
+            .casino-bonus {
+                font-size: 14px;
+            }
+
+            .casino-btn {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+
+            .popup-notification {
+                padding: 30px 20px;
+            }
+            .popup-text {
+                font-size: 20px;
+            }
+            .popup-icon {
+                width: 60px;
+            }
+
+            .footer-warning {
+                font-size: 16px;
+            }
+            .footer-copy {
+                font-size: 14px;
+            }
+        }
+
+        .about-content .section-title {
+    margin: 40px 0 20px;
+    font-size: 32px;
+    text-align: left;
+}
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .about-content .section-title {
+        font-size: 26px;
+        margin: 30px 0 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        background: rgba(0, 0, 0, 0.3); /* лёгкая затемняющая подложка */
+        border-radius: 12px;
+        padding: 10px;
+        margin: 0 10px;
+    }
+}
+    </style>
+</head>
+<body>
+
+    <main class="container">
+        <header>
+            <img src="images/minedrop.png" alt="Логотип MINEDROP" class="logo-img" loading="lazy">
+            
+            <div class="subtitle mc-font stroke-med">
+                Копай руду и получай реальные деньги
+            </div>
+            
+            <div class="header-buttons">
+                <a href="https://beef-way-three.com/c2feea520" aria-label="Играть сейчас" target="_blank" rel="noopener noreferrer">
+                    <img src="images/Group%2078.png" alt="" class="btn-img" loading="lazy">
+                </a>
+                <a href="https://beef-way-three.com/c2feea520" aria-label="Узнать больше об игре" target="_blank" rel="noopener noreferrer">
+                    <img src="images/Group%2079.png" alt="" class="btn-img" loading="lazy">
+                </a>
+            </div>
+
+            <div class="section-title mc-font stroke-lg">Просто попробуй</div>
+            
+            <div class="video-composition">
+                <img src="images/Group%2094.png" alt="" class="frame-bg" loading="lazy">
+                <div class="video-wrapper">
+                    <video autoplay muted loop playsinline>
+                        <source src="images/1018.mp4" type="video/mp4">
+                        Ваш браузер не поддерживает видео.
+                    </video>
+                </div>
+            </div>
+
+                <!-- === ТОП КАЗИНО БЛОК === -->
+    <div class="section-title mc-font stroke-lg">Топ казино с MINEDROP</div>
+    <div class="casinos-grid">
+        <div class="casino-card">
+            <div class="casino-rank mc-font stroke-sm">#1</div>
+            <img src="images/beef.png" alt="BEEF" class="casino-logo" loading="lazy">
+            <div class="casino-bonus mc-font stroke-sm">250% + 600 FS</div>
+            <a href="https://beef-way-three.com/c2feea520" class="casino-btn mc-font" target="_blank" rel="noopener noreferrer">Играть</a>
+        </div>
+        <div class="casino-card">
+            <div class="casino-rank mc-font stroke-sm">#2</div>
+            <img src="images/martin.png" alt="MARTIN" class="casino-logo" loading="lazy">
+            <div class="casino-bonus mc-font stroke-sm">225% + 600 FS</div>
+            <a href="https://martin-way-six.com/c0b5e0f74" class="casino-btn mc-font" target="_blank" rel="noopener noreferrer">Играть</a>
+        </div>
+        <div class="casino-card">
+            <div class="casino-rank mc-font stroke-sm">#3</div>
+            <img src="images/1go.png" alt="1GO" class="casino-logo" loading="lazy">
+            <div class="casino-bonus mc-font stroke-sm">150%</div>
+            <a href="https://1go-blrs10.com/c91b15f9d" class="casino-btn mc-font" target="_blank" rel="noopener noreferrer">Играть</a>
+        </div>
+    </div>
+
+            <div class="section-title mc-font stroke-lg">Об игре</div>
+
+            <div class="about-container">
+                <div class="dark-box">
+<div class="about-content">
+    <span class="about-heading">MINEDROP</span>
+    <span class="about-desc">
+        — это инновационный видеослот, созданный на основе популярной вселенной Minecraft. Игра успешно соединила элементы культовой песочницы с современными механиками онлайн-казино, создав уникальный продукт, который быстро завоевал признание среди миллионов игроков по всему миру.<br><br>
+
+        Главная изюминка слота MINEDROP заключается в его уникальной системе каскадных выигрышей и разрушения блоков. Вместо традиционных барабанов с символами игрок взаимодействует с сеткой пиксельных блоков, которые исчезают при образовании выигрышных комбинаций. Эта механика напрямую заимствована из игровой логики Minecraft, что делает MINEDROP узнаваемым для поклонников оригинальной песочницы.
+    </span>
+
+    <h2 class="section-title mc-font stroke-lg">Технические характеристики</h2>
+    <span class="about-desc">
+        MINEDROP работает с показателем RTP (Return To Player) на уровне 96%, что соответствует стандартам современных слотов премиум-класса. Этот параметр означает, что в долгосрочной перспективе из каждых 100 рублей, поставленных игроками, казино возвращает в среднем 96 рублей в виде выигрышей. Высокий RTP делает MINEDROP привлекательным для опытных игроков, ценящих честность и прозрачность.<br><br>
+
+        Максимальный выигрыш достигает 5 000× от первоначальной ставки. При ставке в 100 рублей теоретически можно получить 500 000 рублей. Такой потенциал характеризует MINEDROP как слот с высокой волатильностью — он подходит тем, кто ищет крупные призы, но готов к редким, зато щедрым выплатам.
+    </span>
+
+    <h2 class="section-title mc-font stroke-lg">Игровая механика</h2>
+    <span class="about-desc">
+        Основной механизм построен на принципе каскадов: при выигрыше блоки исчезают, а сверху падают новые, создавая цепочки выигрышей в рамках одного спина. Это делает геймплей динамичным и захватывающим.<br><br>
+
+        Одной из самых зрелищных особенностей является присутствие <b>TNT-блоков</b>. При активации они взрываются, уничтожая соседние элементы и запуская дополнительные каскады. TNT может появляться как в базовой игре, так и во время бонусных цепочек, добавляя элемент непредсказуемости и азарта.<br><br>
+
+        MINEDROP использует <b>три уникальных scatter-символа</b>, каждый из которых открывает свой режим:<br>
+        • «Начальное разрушение» — случайное удаление блоков перед спином<br>
+        • «Режим TNT» — повышенная частота взрывов<br>
+        • «Дождь золота» — падение редких высокооплачиваемых символов
+    </span>
+
+    <h2 class="section-title mc-font stroke-lg">Система джекпотов</h2>
+    <span class="about-desc">
+        В MINEDROP реализована система фиксированных джекпотов трёх уровней:<br>
+        • <b>Mini</b> — от 50× до 200×, выпадает часто<br>
+        • <b>Major</b> — до 1 000×, срабатывает в 1–5% раундов<br>
+        • <b>Mega</b> — до 5 000×, редкий, но максимальный приз<br><br>
+
+        Размеры джекпотов не прогрессивные, а фиксированные — это обеспечивает прозрачность и предсказуемость выплат.
+    </span>
+
+    <h2 class="section-title mc-font stroke-lg">Почему MINEDROP стал хитом?</h2>
+    <span class="about-desc">
+        Гемблинг-сообщество высоко оценило слот за сочетание ностальгии по Minecraft и современных казино-механик. Пиксельная графика вызывает эмоции, а динамичный геймплей с каскадами, взрывами и бонусами держит в напряжении до последнего спина.<br><br>
+
+        Высокая волатильность привлекает любителей острых ощущений, а RTP 96% даёт реальные шансы на прибыль в долгосрочной перспективе. Профессиональные гемблеры отмечают MINEDROP как один из самых честных и переигрываемых слотов нового поколения.
+    </span>
+
+    <h2 class="section-title mc-font stroke-lg">Стратегия и ответственная игра</h2>
+    <span class="about-desc">
+        Рекомендуется ставить не более 2–5% от банкролла за спин. Выбор размера ставки — личное решение: маленькие ставки продлевают сессию, большие — увеличивают потенциал выигрыша. Однако помните: результат всегда определяется RNG и математикой слота.<br><br>
+
+        MINEDROP — это не просто слот, а настоящее приключение в мире пиксельного азарта. Справедливый RTP, щедрые джекпоты, взрывы TNT и каскады делают каждую игру уникальной. Попробуйте свою удачу — но всегда играйте ответственно!
+    </span>
+</div>
+                </div>
+            </div>
+
+            <div class="cta-wrapper">
+                <div class="cta-text mc-font stroke-lg">Оцени сейчас --></div>
+                <a href="https://beef-way-three.com/c2feea520" aria-label="Начать игру" target="_blank" rel="noopener noreferrer">
+                    <img src="images/Group%2085.png" alt="" class="cta-btn-img" loading="lazy">
+                </a>
+            </div>
+        </header>
+    </main>
+
+    <footer>
+        <div class="dark-box footer-box">
+            <div class="footer-warning">
+                Играйте ответственно. Только для лиц старше 18 лет.
+            </div>
+            <div class="footer-copy">
+                © 2026 Minedrop. Все права защищены.
+            </div>
+        </div>
+    </footer>
+
+    <div id="spinsPopup" class="popup-notification">
+        <div class="popup-close" id="popupCloseBtn">x</div>
+        <img src="images/pickaxe.png" alt="Иконка кирки" class="popup-icon" loading="lazy">
+        <div class="popup-text mc-font stroke-sm">
+            Доступно 20 фриспинов
+        </div>
+        <a href="https://beef-way-three.com/c2feea520" class="popup-btn mc-font" target="_blank" rel="noopener noreferrer">Забрать</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const popup = document.getElementById('spinsPopup');
+            const closeBtn = document.getElementById('popupCloseBtn');
+
+            if (!popup) return;
+
+            setTimeout(() => {
+                popup.classList.add('show');
+            }, 5000);
+
+            if (closeBtn) {
+                closeBtn.addEventListener('click', () => {
+                    popup.classList.remove('show');
+                });
+            }
+
+            popup.addEventListener('click', (e) => {
+                if (e.target === popup) {
+                    popup.classList.remove('show');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
