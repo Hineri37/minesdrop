@@ -201,35 +201,38 @@
 }
         }
 
-        .video-composition {
-            position: relative;
-            width: 100%;
-            height: 580px; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 70px; 
-        }
+.video-composition {
+    position: relative;
+    width: 100%;
+    height: auto;
+    min-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 70px;
+}
 
-        .frame-bg {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 550px; 
-            height: auto;
-            z-index: 1;
-        }
+.frame-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    max-width: 550px;
+    max-height: 620px;
+    object-fit: contain;
+    z-index: 1;
+}
 
-        .video-wrapper {
-            position: relative;
-            z-index: 5;
-            border: 6px solid #000;
-            background: #000;
-            width: 340px; 
-            height: 620px;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-        }
+.video-wrapper {
+    position: relative;
+    z-index: 5;
+    border: 6px solid #000;
+    background: #000;
+    width: 340px;
+    height: 620px;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.6);
+}
 
         video {
             width: 100%;
@@ -674,15 +677,15 @@
 
             <div class="section-title mc-font stroke-lg">Просто попробуй</div>
             
-            <div class="video-composition">
-                <img src="images/Group%2094.png" alt="" class="frame-bg" loading="lazy">
-                <div class="video-wrapper">
-                    <video autoplay muted loop playsinline>
-                        <source src="images/1018.mp4" type="video/mp4">
-                        Ваш браузер не поддерживает видео.
-                    </video>
-                </div>
-            </div>
+<div class="video-composition">
+    <img src="images/Group%2094.png" alt="" class="frame-bg" loading="lazy">
+    <div class="video-wrapper">
+        <video autoplay muted loop playsinline>
+            <source src="images/1018.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+        </video>
+    </div>
+</div>
 
                 <!-- === ТОП КАЗИНО БЛОК === -->
     <div class="section-title mc-font stroke-lg">Топ казино с MINEDROP</div>
@@ -821,5 +824,6 @@
 </body>
 
 </html>
+
 
 
